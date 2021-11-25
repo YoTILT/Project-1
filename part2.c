@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define size 10
+//#define size 10
 
 int main()
 {   //initializing variables
     int command;
-    char Numbers[size][7] = {0};
+    char Numbers[][7] = {0};
     int Num1 = 0;
     int Exit = 0;
-
+    int size = 1;
 
     //main loop
     while (Exit != 1)
@@ -44,17 +44,19 @@ int main()
             while ((c = getchar()) != '\n' && c != EOF)
             {
             }
+            
             break;
         case 2: //search
 
         case 3: //delete
             int delete;
+            if(Num1 > 0){
             printf("Which number would you like to delete?\n");
 
             //printing all the numbers with a number beside it indicating row
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < Num1; i++)
             {
-                printf("%d - ", i + 1);
+                printf("%3d - ", i + 1);
                 for (int j = 0; j < 7; j++)
                 {
                     printf("%d ", Numbers[i][j]);
@@ -62,30 +64,39 @@ int main()
                 puts("");
             }
 
-            printf("Number: ");
+            printf("Number(0 to cancel): ");
             scanf_s("%d", &delete);
             //this loop just overwrites the number with the number below it, so the cleared row is put at the bottom
-            for (int i = delete - 1; i < size; i++)
+            if (delete == 0){
+                break;
+            }else{
+            for (int i = delete - 1; i < Num1; i++)
             {
                 for (int j = 0; j < 7; j++)
                 {
-                    if (i == size-1)
+                    if (i == Num1-1)
                     {
                         Numbers[i][j] = 0;
                     }
-                    else if (i < size)
+                    else if (i < Num1)
                     {
                         Numbers[i][j] = Numbers[i + 1][j];
                     }
                 }
             }
-            //decreasing the num counter for the add command
-            Num1--;
+            Num1--;//decreasing the num counter for the add command
+            }
+            }else{
+                printf("There are no numbers to delete\n");
+            }
+            
+            
             break;
 
         case 4: //list
-        //this just prints the entire array, it could probably be optimized so it only prints the row if it has a number
-            for (int i = 0; i < size; i++)
+        //this just prints the entire array
+        if(Num1 > 0){
+            for (int i = 0; i < Num1; i++)
             {
                 for (int j = 0; j < 7; j++)
                 {
@@ -93,6 +104,9 @@ int main()
                 }
                 puts("");
             }
+        }else{
+            printf("There are no numbers to list\n");
+        }
             break;
 
         case 5: //exit
