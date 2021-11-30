@@ -47,6 +47,26 @@ int main()
             
             break;
         case 2: //search
+                int search;
+                printf("Enter a number you want to search for then hit enter. \n");
+                scanf("%d", &search);
+                int found=0;
+                int x=0;
+                for(int i=0; i < num1; ++i) //  num1 might go here its a counter in a way?
+                {
+                    if (numbers[i] == search) // numbers is our array replace with the array of program if im not right
+                    {
+                        found=1;
+                       x=i;
+                        break;
+                    }
+                }
+                if(found ==1){
+                    printf("Number does exits and can be found at position %d\n",x+1);
+                }else{
+                    printf("Number does not exits and cannot be found");
+                }
+                   break; 
 
         case 3: //delete
             int delete;
